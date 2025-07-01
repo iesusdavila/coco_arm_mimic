@@ -43,6 +43,7 @@ install(PROGRAMS
 # ========== Instalación común ==========
 install(DIRECTORY
   include
+  launch
   scripts
   src
   DESTINATION share/${PROJECT_NAME}
