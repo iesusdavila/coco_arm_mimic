@@ -84,47 +84,47 @@ void BodyTrackerNode::bodyPointsCallback(const coco_interfaces::msg::BodyPoints:
     }
     
     float angle_shoulder_right_elbow_YX = calculateAngleWithVertical(
-        msg->right_shoulder_x, msg->right_shoulder_y,
-        msg->right_elbow_x, msg->right_elbow_y
+        msg->right_shoulder.x, msg->right_shoulder.y,
+        msg->right_elbow.x, msg->right_elbow.y
     );
     
     float angle_elbow_right_wrist_YX = calculateRelativeAngle(
-        msg->right_shoulder_x, msg->right_shoulder_y,
-        msg->right_elbow_x, msg->right_elbow_y,
-        msg->right_wrist_x, msg->right_wrist_y
+        msg->right_shoulder.x, msg->right_shoulder.y,
+        msg->right_elbow.x, msg->right_elbow.y,
+        msg->right_wrist.x, msg->right_wrist.y
     );
     
     float angle_shoulder_left_elbow_YX = -calculateAngleWithVertical(
-        msg->left_shoulder_x, msg->left_shoulder_y,
-        msg->left_elbow_x, msg->left_elbow_y
+        msg->left_shoulder.x, msg->left_shoulder.y,
+        msg->left_elbow.x, msg->left_elbow.y
     );
     
     float angle_elbow_left_wrist_YX = -calculateRelativeAngle(
-        msg->left_shoulder_x, msg->left_shoulder_y,
-        msg->left_elbow_x, msg->left_elbow_y,
-        msg->left_wrist_x, msg->left_wrist_y
+        msg->left_shoulder.x, msg->left_shoulder.y,
+        msg->left_elbow.x, msg->left_elbow.y,
+        msg->left_wrist.x, msg->left_wrist.y
     );
     
     float angle_shoulder_right_elbow_ZY = calculateAngleWithVerticalZY(
-        msg->right_shoulder_z, msg->right_shoulder_y,
-        msg->right_elbow_z, msg->right_elbow_y
+        msg->right_shoulder.z, msg->right_shoulder.y,
+        msg->right_elbow.z, msg->right_elbow.y
     );
     
     float angle_elbow_right_wrist_ZY = calculateRelativeAngleZY(
-        msg->right_shoulder_z, msg->right_shoulder_y,
-        msg->right_elbow_z, msg->right_elbow_y,
-        msg->right_wrist_z, msg->right_wrist_y
+        msg->right_shoulder.z, msg->right_shoulder.y,
+        msg->right_elbow.z, msg->right_elbow.y,
+        msg->right_wrist.z, msg->right_wrist.y
     );
     
     float angle_shoulder_left_elbow_ZY = calculateAngleWithVerticalZY(
-        msg->left_shoulder_z, msg->left_shoulder_y,
-        msg->left_elbow_z, msg->left_elbow_y
+        msg->left_shoulder.z, msg->left_shoulder.y,
+        msg->left_elbow.z, msg->left_elbow.y
     );
     
     float angle_elbow_left_wrist_ZY = calculateRelativeAngleZY(
-        msg->left_shoulder_z, msg->left_shoulder_y,
-        msg->left_elbow_z, msg->left_elbow_y,
-        msg->left_wrist_z, msg->left_wrist_y
+        msg->left_shoulder.z, msg->left_shoulder.y,
+        msg->left_elbow.z, msg->left_elbow.y,
+        msg->left_wrist.z, msg->left_wrist.y
     );
     
     arm_msg.shoulder_tilt_angle = 0.0;
@@ -139,10 +139,10 @@ void BodyTrackerNode::bodyPointsCallback(const coco_interfaces::msg::BodyPoints:
     arm_msg.left_shoulder_elbow_zy = angle_shoulder_left_elbow_ZY;
     arm_msg.left_elbow_wrist_zy = angle_elbow_left_wrist_ZY;
     
-    arm_msg.right_wrist_x = msg->right_wrist_x;
-    arm_msg.right_wrist_y = msg->right_wrist_y;
-    arm_msg.left_wrist_x = msg->left_wrist_x;
-    arm_msg.left_wrist_y = msg->left_wrist_y;
+    arm_msg.right_wrist_x = msg->right_wrist.x;
+    arm_msg.right_wrist_y = msg->right_wrist.y;
+    arm_msg.left_wrist_x = msg->left_wrist.x;
+    arm_msg.left_wrist_y = msg->left_wrist.y;
 
     last_valid_arm_msg = arm_msg;
     last_detection_valid = true;
