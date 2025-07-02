@@ -4,6 +4,7 @@
 #include "rclcpp/rclcpp.hpp"
 #include "coco_interfaces/msg/body_points.hpp"
 #include "coco_interfaces/msg/body_position.hpp"
+#include "geometry_msgs/msg/point32.hpp"
 
 class BodyTrackerNode : public rclcpp::Node {
 public:
