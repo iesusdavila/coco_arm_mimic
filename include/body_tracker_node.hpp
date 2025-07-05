@@ -14,12 +14,9 @@ private:
     bool last_detection_valid;
     coco_interfaces::msg::BodyPosition last_valid_arm_msg;
 
-    float smoothAngle(float new_angle, float prev_angle, float alpha = 0.2);
     float radian2Euler(float radian);
     float calculateAngleWithVertical(float shoulder_x, float shoulder_y, float elbow_x, float elbow_y);
     float calculateAngleWithVerticalZY(float shoulder_z, float shoulder_y, float elbow_z, float elbow_y);
-    float calculateShoulderTilt(float left_shoulder_x, float left_shoulder_y,
-                               float right_shoulder_x, float right_shoulder_y);
     float calculateRelativeAngle(float shoulder_x, float shoulder_y,
                                float elbow_x, float elbow_y,
                                float wrist_x, float wrist_y);

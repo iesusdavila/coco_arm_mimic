@@ -11,10 +11,6 @@ BodyTrackerNode::BodyTrackerNode() : Node("body_tracker_node"), last_detection_v
     RCLCPP_INFO(this->get_logger(), "Body tracker node initialized");
 }
 
-float BodyTrackerNode::smoothAngle(float new_angle, float prev_angle, float alpha) {
-    return alpha * new_angle + (1 - alpha) * prev_angle;
-}
-
 float BodyTrackerNode::radian2Euler(float radian) {
     return radian * 180.0 / M_PI;
 }
@@ -31,14 +27,6 @@ float BodyTrackerNode::calculateAngleWithVerticalZY(float shoulder_z, float shou
     float v_y = elbow_y - shoulder_y;
     
     return radian2Euler(atan2(-v_z, v_y));
-}
-
-float BodyTrackerNode::calculateShoulderTilt(float left_shoulder_x, float left_shoulder_y,
-                           float right_shoulder_x, float right_shoulder_y) {
-    float dx = right_shoulder_x - left_shoulder_x;
-    float dy = right_shoulder_y - left_shoulder_y;
-    
-    return radian2Euler(atan2(dy, dx));
 }
 
 float BodyTrackerNode::calculateRelativeAngle(float shoulder_x, float shoulder_y,
