@@ -114,9 +114,7 @@ void BodyTrackerNode::bodyPointsCallback(const coco_interfaces::msg::BodyPoints:
         msg->left_elbow.z, msg->left_elbow.y,
         msg->left_wrist.z, msg->left_wrist.y
     );
-    
-    arm_msg.shoulder_tilt_angle = 0.0;
-    
+        
     arm_msg.right_shoulder_elbow_yx = angle_shoulder_right_elbow_YX;
     arm_msg.right_elbow_wrist_yx = angle_elbow_right_wrist_YX;
     arm_msg.left_shoulder_elbow_yx = angle_shoulder_left_elbow_YX;
