@@ -64,15 +64,9 @@ float BodyTrackerNode::calculateRelativeAngleZY(float shoulder_z, float shoulder
 
 void BodyTrackerNode::bodyPointsCallback(const coco_interfaces::msg::BodyPoints::SharedPtr msg) {
     last_body_points_ = msg;
-    has_body_points_=true;
-    
 }
 
 void BodyTrackerNode::timerCallback() {
-    if (!has_body_points_) {
-        return;
-    }
-
     auto msg = last_body_points_;
     coco_interfaces::msg::BodyPosition arm_msg;
     arm_msg = last_valid_arm_msg;
