@@ -32,7 +32,7 @@ DualArmTrajectoryController::DualArmTrajectoryController() : Node("body_trajecto
         std::bind(&DualArmTrajectoryController::armTrackerCallback, this, std::placeholders::_1));
     
     timer_ = this->create_wall_timer(
-        std::chrono::milliseconds(300), 
+        std::chrono::milliseconds(20), 
         std::bind(&DualArmTrajectoryController::sendTrajectoryGoal, this));
     
     all_joints_ = {
