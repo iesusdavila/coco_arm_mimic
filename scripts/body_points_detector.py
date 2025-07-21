@@ -62,7 +62,7 @@ class BodyPointsDetectorNode(Node):
         
         if results.pose_landmarks and results.pose_world_landmarks:
             world_landmarks = results.pose_world_landmarks.landmark
-
+            img_landmarks   = results.pose_landmarks.landmark
             plot_world_landmarks(ax, results.pose_world_landmarks)
 
             points_msg.is_detected = True
@@ -102,9 +102,19 @@ class BodyPointsDetectorNode(Node):
             left_wrist.y = world_landmarks[mp_pose.PoseLandmark.LEFT_WRIST].y
             left_wrist.z = world_landmarks[mp_pose.PoseLandmark.LEFT_WRIST].z
             points_msg.left_wrist = left_wrist
-            
-            self.publisher.publish(points_msg)        
+        
+            l2 = img_landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER]
+            r2 = img_landmarks[mp_pose.PoseLandmark.RIGHT_SHOULDER]
+            min_x, max_x = min(l2.x, r2.x), max(l2.x, r2.x)
 
+            if min_x < 0.3 or max_x > 0.7:
+                self.get_logger().info(
+                    f"Off-center image (x-range={min_x:.2f} to {max_x:.2f}), skipping BodyPoints")
+                return
+
+            
+            self.publisher.publish(points_msg)
+            
 def main(args=None):
     rclpy.init(args=args)
     node = BodyPointsDetectorNode()

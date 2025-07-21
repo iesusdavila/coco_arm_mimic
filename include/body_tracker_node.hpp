@@ -11,11 +11,13 @@ public:
     BodyTrackerNode();
 
 private:
-    
+
     bool last_detection_valid;
     coco_interfaces::msg::BodyPosition last_valid_arm_msg;
     coco_interfaces::msg::BodyPoints::SharedPtr last_body_points_;
     
+    bool has_body_points_{false};
+  
     std::chrono::milliseconds publish_period_{300};
     rclcpp::TimerBase::SharedPtr publish_timer_;
 
