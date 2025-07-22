@@ -55,6 +55,7 @@ class BodyPointsDetectorNode(Node):
 
         self.was_centered = False
         self.centered_time = None
+        self.max_waiting_time=5.0
 
     def image_callback(self, msg):
         frame = self.bridge.imgmsg_to_cv2(msg, desired_encoding='bgr8')
@@ -111,9 +112,9 @@ class BodyPointsDetectorNode(Node):
             r2 = img_landmarks[mp_pose.PoseLandmark.RIGHT_SHOULDER]
             min_x, max_x = min(l2.x, r2.x), max(l2.x, r2.x)
 
-            centered = not (min_x < 0.3 or max_x > 0.7)
+            outside_center = min_x < 0.3 or max_x > 0.7
 
-            if not centered:
+            if outside_center:
                 if self.was_centered:
                     self.get_logger().info('Persona fuera de centro, reiniciando timer de centrado.')
                 self.was_centered = False
@@ -128,7 +129,7 @@ class BodyPointsDetectorNode(Node):
                     self.centered_time = current
                     self.get_logger().info('Centrado detectado. Esperando 5 segundos antes de publicar.')
                     return
-                elif (current - self.centered_time) < 5.0:
+                elif (current-self.centered_time)<self.max_waiting_time:
                     return
                 else:
                     self.was_centered = True
